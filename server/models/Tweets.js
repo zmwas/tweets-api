@@ -13,5 +13,4 @@ module.exports = (sequelize, DataTypes) => {
     Tweet.associate = (models) => {
         Tweet.belongsTo(models.User)
     };
-    return Tweet;
 };

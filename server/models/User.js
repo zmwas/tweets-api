@@ -33,5 +33,4 @@ module.exports = (sequelize, DataTypes) => {
     User.associate = (models) => {
         User.hasMany(models.Tweets)
     };
-  return User;
 };
