@@ -1,0 +1,25 @@
+{
+  "name": "tweets-api",
+  "version": "1.0.0",
+  "description": "Tweets api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zmwas/tweets-api.git"
+  },
+  "author": "Zack",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zmwas/tweets-api/issues"
+  },
+  "homepage": "https://github.com/zmwas/tweets-api#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "pg": "^7.8.1",
+    "sequelize": "^4.42.0"
+  }
+}
