@@ -30,7 +30,8 @@ module.exports = (sequelize, DataTypes) => {
             }
         }
     });
-    User.associate = (models) => {
+    User.associations = (models) => {
         User.hasMany(models.Tweets)
     };
+    return User;
 };

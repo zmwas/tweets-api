@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         }
     });
-    Tweet.associate = (models) => {
+    Tweet.associations = (models) => {
         Tweet.belongsTo(models.User)
     };
+    return Tweet;
 };
