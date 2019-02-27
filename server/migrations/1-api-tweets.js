@@ -5,49 +5,20 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * createTable "tweets", deps: []
  * createTable "users", deps: []
+ * createTable "tweets", deps: [users]
+ * createTable "auth_tokens", deps: [users]
  *
  **/
 
 var info = {
     "revision": 1,
-    "name": "tweets-api",
-    "created": "2019-02-26T09:28:22.021Z",
+    "name": "api-tweets",
+    "created": "2019-02-27T10:10:38.656Z",
     "comment": ""
 };
 
 var migrationCommands = [{
-        fn: "createTable",
-        params: [
-            "tweets",
-            {
-                "id": {
-                    "type": Sequelize.INTEGER,
-                    "field": "id",
-                    "autoIncrement": true,
-                    "primaryKey": true
-                },
-                "text": {
-                    "type": Sequelize.TEXT,
-                    "field": "text",
-                    "allowNull": false
-                },
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "field": "createdAt",
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "field": "updatedAt",
-                    "allowNull": false
-                }
-            },
-            {}
-        ]
-    },
-    {
         fn: "createTable",
         params: [
             "users",
@@ -77,6 +48,88 @@ var migrationCommands = [{
                     "type": Sequelize.DATE,
                     "field": "updatedAt",
                     "allowNull": false
+                }
+            },
+            {}
+        ]
+    },
+    {
+        fn: "createTable",
+        params: [
+            "tweets",
+            {
+                "id": {
+                    "type": Sequelize.INTEGER,
+                    "field": "id",
+                    "autoIncrement": true,
+                    "primaryKey": true
+                },
+                "text": {
+                    "type": Sequelize.TEXT,
+                    "field": "text",
+                    "allowNull": false
+                },
+                "createdAt": {
+                    "type": Sequelize.DATE,
+                    "field": "createdAt",
+                    "allowNull": false
+                },
+                "updatedAt": {
+                    "type": Sequelize.DATE,
+                    "field": "updatedAt",
+                    "allowNull": false
+                },
+                "userId": {
+                    "type": Sequelize.INTEGER,
+                    "field": "userId",
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "users",
+                        "key": "id"
+                    },
+                    "allowNull": true
+                }
+            },
+            {}
+        ]
+    },
+    {
+        fn: "createTable",
+        params: [
+            "auth_tokens",
+            {
+                "id": {
+                    "type": Sequelize.INTEGER,
+                    "field": "id",
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "allowNull": false
+                },
+                "token": {
+                    "type": Sequelize.STRING,
+                    "field": "token"
+                },
+                "createdAt": {
+                    "type": Sequelize.DATE,
+                    "field": "createdAt",
+                    "allowNull": false
+                },
+                "updatedAt": {
+                    "type": Sequelize.DATE,
+                    "field": "updatedAt",
+                    "allowNull": false
+                },
+                "userId": {
+                    "type": Sequelize.INTEGER,
+                    "field": "userId",
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "users",
+                        "key": "id"
+                    },
+                    "allowNull": true
                 }
             },
             {}

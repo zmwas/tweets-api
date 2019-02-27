@@ -8,6 +8,8 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 const TweetsModel = require("./Tweets");
+const UserModel = require("./User");
+const AuthTokenModel = require("./AuthToken");
 
 let sequelize;
 if (config.use_env_variable) {
@@ -36,5 +38,13 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 const Tweet = TweetsModel(sequelize, Sequelize);
+const User = UserModel(sequelize, Sequelize);
+const AuthToken = AuthTokenModel(sequelize, Sequelize);
 
-module.exports = {db, Tweet};
+User.hasMany(AuthToken);
+User.hasMany(Tweet);
+Tweet.belongsTo(User);
+AuthToken.belongsTo(User);
+
+
+module.exports = db;

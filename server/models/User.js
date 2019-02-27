@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
-
+const Tweet = require("./index").Tweet;
+const AuthToken = require("./index").AuthToken;
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('user', {
         id: {
@@ -15,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(10),
             allowNull: false,
         }
-
     }, {
         hooks: {
             beforeCreate: async (user) => {
@@ -30,8 +30,5 @@ module.exports = (sequelize, DataTypes) => {
             }
         }
     });
-    User.associations = (models) => {
-        User.hasMany(models.Tweets)
-    };
     return User;
 };
