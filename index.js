@@ -19,4 +19,4 @@ app.get('/api/tweets/', tweetsController.list);
 app.get('/api/tweets/:id', tweetsController.retrieve);
 app.put('/api/tweets/:id', tweetsController.update);
 app.del('/api/tweets/:id', tweetsController.delete);
-app.post('/api/user/register/',userController.create);
+app.post('/api/register/',userController.create);

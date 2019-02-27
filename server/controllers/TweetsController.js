@@ -1,4 +1,8 @@
-const Tweet = require("../models").Tweet;
+const sequelize = require("../models/index").sequelize;
+const Sequelize = require("../models/index").Sequelize
+const TweetModel = require("../models/Tweets");
+
+const Tweet = TweetModel(sequelize, Sequelize);
 
 module.exports = {
     create(req, res) {

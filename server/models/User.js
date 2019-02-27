@@ -1,6 +1,4 @@
 const bcrypt = require("bcrypt");
-const Tweet = require("./index").Tweet;
-const AuthToken = require("./index").AuthToken;
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('user', {
         id: {
@@ -9,18 +7,18 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         username: {
-            type: DataTypes.STRING(10),
+            type: DataTypes.STRING,
             allowNull: false,
         },
         password: {
-            type: DataTypes.STRING(10),
+            type: DataTypes.STRING(1000),
             allowNull: false,
         }
     }, {
         hooks: {
             beforeCreate: async (user) => {
                 const salt = await bcrypt.genSaltSync(10);
-                user.password = await bcrypt.hashSync(password, salt);
+                user.password = await bcrypt.hashSync(user.password, salt);
             }
         },
 
@@ -28,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
             validPassword: async (password) => {
                 return await bcrypt.compare(password, this.password)
             }
-        }
+        },
     });
     return User;
 };
